@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>event</title>
+<link rel="stylesheet" type="text/css" href="../../source/work/html/css/ui_html5.css">
+<script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+</head>
+<body class="htmlguide">
+<h1>event</h1>
+<p class="guide-p">
+	<a href="http://www.quirksmode.org/js/events_mouse.html">마우스이벤트</a><br>
+</p>
+
+<!-- ================================================== -->
+<style type="text/css">
+#layer {margin:20px; padding:15px; border:1px solid red; background:#fafafa; zoom:1;}
+#layer div, #layer p {margin:10px; padding:10px; border:1px solid red;}
+</style>
+<div class="layer" id="layer">
+	<p class="test1"><a class="alink" href="#">alink1</a> <span class="span">span</span></p>
+	<div class="test2">div contents<br>div contents</div>
+	<p class="test3"><a href="#">alink2</a></p>
+</div>
+<script type="text/javascript">
+function leave(my, e){
+	var e = e || window.event;
+	var tg = e.target || e.srcElement;
+	if( tg.tagName != my.tagName ) return false;
+	
+	var reltg = e.relatedTarget || e.toElement;
+	while ( reltg.offsetParent ){
+		if (my == reltg) return false;
+		reltg = reltg.parentNode;
+	}
+	return true;
+}
+
+var ele = document.getElementById("layer");
+ele.onmouseout = function(e){
+	if( ! leave(this, e) ) return false;
+	this.style.display = "none";
+}
+</script>
+<!-- ================================================== -->
+</body>
+</html>
+
+
+
+
+
+

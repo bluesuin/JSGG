@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>무제 문서</title>
+</head>
+<body>
+<script type="text/javascript">
+
+var v = 1;
+function test(){
+	alert( this.v );
+}
+
+var o = { v : 10 }
+o.func = test;
+
+var o2 = { v : 20 }
+o2.func = test;
+
+test();
+o.func();
+o2.func();
+
+</script>
+</body>
+</html>

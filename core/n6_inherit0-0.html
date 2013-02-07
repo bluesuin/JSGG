@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>무제 문서</title>
+</head>
+<body>
+<script type="text/javascript">
+
+function Parent(){}
+Parent.prototype = {
+	test1 : "test1"
+}
+
+var p = new Parent(); // new로 객체가 생성될 당시의 prototype 객체를 바라봅니다.
+// console.log( p.__proto__ );
+
+Parent.prototype.test1 = "change test1";
+Parent.prototype.test2 = "test2";
+
+// prototype에 할당되는 지금 객체 new로 생성될때의 그 객체가 아님
+Parent.prototype = { test1 : 1 , test2 : 2 };
+
+console.log( "p.test1 : ",  p.test1 ); 
+console.log( "p.test2 : ",  p.test2 );  
+
+</script>
+</body>
+</html>

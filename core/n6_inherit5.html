@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>무제 문서</title>
+</head>
+<body>
+
+<div id="divTest" onclick="this.fire(event)" style="height:100px; background:orange;">divTest</div>
+
+<script type="text/javascript">
+
+var eventuality = function ( that ) {
+    var registry = {};
+	
+    that.fire = function( event ){
+			var array
+				, func
+				, handler
+				, i
+				, type = (typeof event === 'string') ? event : event.type;
+
+		if( registry.hasOwnProperty(type) ){
+			array = registry[type];
+			
+			for( i = 0; i < array.length; i += 1 ){
+				handler = array[i];
+				func = handler.method;
+				
+				if( typeof func === 'string' ){
+					func = this[func];
+				}
+				
+				func.apply( this, handler.parameters || [event] );
+            }
+        }
+        return this;
+    };
+
+    that.on = function( type, method, parameters /* parameters : array */ ){
+        var handler = {
+			method: method
+			, parameters: parameters
+        }
+        if( registry.hasOwnProperty(type) ){
+            registry[type].push(handler);
+        }else{
+            registry[type] = [handler];
+        }
+        return this;
+    };
+	
+    return that;
+}
+
+var oDiv = eventuality( document.getElementById("divTest") );
+oDiv.on("click", function(){ alert('ok'); });
+
+</script>
+</body>
+</html>

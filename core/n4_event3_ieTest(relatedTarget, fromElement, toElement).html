@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>event</title>
+<link rel="stylesheet" type="text/css" href="../../source/work/html/css/ui_html5.css">
+<script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<style type="text/css">
+#layer {margin:20px; padding:15px; border:1px solid red; background:#fafafa; zoom:1;}
+#layer div, #layer p {margin:10px; padding:10px; border:1px solid red;}
+#result {position:absolute; top:20px; right:20px; padding:30px; font:normal 12px/18px gulim; border:1px solid red; background:#dadada; z-index:10000;}
+</style>
+</head>
+<body class="htmlguide">
+<h1>event</h1>
+<p class="guide-p">
+	ie의 경우 <strong>마우스오버/아웃 경우</strong>에만 toElement, fromElement 값이 나옴.<br>
+	<strong style="color:red;">relatedTarget</strong> : 이 프로퍼티는 이벤트의 대상 노드와 관련된 노드를 참조한다.<br>
+	mouseover 시에는 이전 오버전에 있던 노드표시,<br>
+	mouseout 시에는 아웃후에 이동된 노드를 표시함
+	<br><br>
+	
+	<strong>fromElement : </strong> 이벤트에서 이 프로퍼티의 값은 마우스가 대상 노드 위로 움직였을 때 포인터가 이전에 가리키던 노드가 무엇인가를 나타낸다.<br>
+	<strong>toElement : </strong> 이벤트에서는 마우스가 대상을 빠져나왔을 때 새로 진입하는 노드가 무엇인지를 타나낸다.
+</p>
+
+<div class="layer" id="layer">
+	<p class="test1"><a class="alink" href="#">alink1</a> <span class="span">span</span></p>
+	<div class="test2">div contents<br>div contents</div>
+	<p class="test3"><a href="#">alink2</a></p>
+</div>
+<div id="result"></div>
+<!-- ================================================== -->
+<script type="text/javascript">
+function Bubble(e) {
+	document.getElementById("result").innerHTML = "";
+		
+	e = e || window.event;
+	
+	if( window.attachEvent ){
+		var src = (e.srcElement && e.srcElement.className ) ? e.srcElement : "";
+		var to = (e.toElement) ? e.toElement : "";
+		var from = (e.fromElement) ? e.fromElement : "";
+		
+		var str = "e.srcElement : " + src + "<br />";
+			str += "e.toElement : " + to + "<br />";
+			str += "e.fromElement : " + from + "<br />";
+		document.getElementById("result").innerHTML = str;
+				
+	}else{
+		console.log( e.relatedTarget );
+	}
+			
+}
+function setup(ele) {
+	if( ele.attachEvent )
+		ele.attachEvent("onmouseover", Bubble); // 1번실행
+	else
+		ele.addEventListener("mouseover", Bubble, false); // 1번실행
+}
+
+window.onload = function(){
+	var ele = document.getElementById("layer");
+	setup( ele );
+}
+
+</script>
+<!-- ================================================== -->
+</body>
+</html>
+
+
+
+
+
+

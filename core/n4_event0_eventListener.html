@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title> new document </title>
+</head>
+<body>
+
+<script type="text/javascript">
+/*
+callback함수 : 어떤 행위(이벤트 등등)를 처리하는 함수
+*/
+function addEvent(obj,evt,callback) {
+	if(obj.addEventListener) {
+		obj.addEventListener(evt,callback,false);
+	// window.addEventListener("click", test, false);
+
+	}else if(obj.attachEvent) { // ie
+		obj.attachEvent('on'+evt,callback);
+	// window.attachEvent("onclick", test);
+	}
+}
+function test(){
+	alert("test");
+}
+addEvent(window, "load", test);
+</script>
+</body>
+</html>

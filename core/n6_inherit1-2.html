@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>무제 문서</title>
+</head>
+<body>
+<script type="text/javascript">
+// 배열, 객체 주소참조
+function test( obj ){
+    alert( obj === o );
+}
+
+var o  = { name : "jiman" };
+o.say = "say";
+test( o );
+
+
+// 메모리상의 같은 주소???
+console.log( { name : "jiman" } === { name : "jiman" } );
+
+</script>
+</body>
+</html>

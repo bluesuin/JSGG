@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>event</title>
+<link rel="stylesheet" type="text/css" href="../../source/work/html/css/ui_html5.css">
+<script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+</head>
+<body class="htmlguide">
+<h1>event</h1>
+<p class="guide-p"><a href="http://www.quirksmode.org/js/events_mouse.html">마우스이벤트</a></p>
+
+<!-- ================================================== -->
+<style type="text/css">
+#layer {margin:20px; padding:15px; border:1px solid red; background:#fafafa;}
+#layer div, #layer p {margin:10px; padding:10px; border:1px solid red;}
+</style>
+<div id="layer">
+	<p><a href="#">alink1</a></p>
+	<div>div contents<br>div contents</div>
+	<p><a href="#">alink2</a></p>
+</div>
+<script type="text/javascript">
+var ele = document.getElementById("layer");
+var capture = false;
+var captureStr = capture ? "Capture" : "Bubble" ;
+
+ele.addEventListener('mouseover', function(e){
+	console.log( captureStr + " : layer Mouseover" );
+}, capture);
+ele.addEventListener('mouseout', function(e){
+	console.log( captureStr + " : layer Mouseout" );
+}, capture);
+
+var etcEle = ele.getElementsByTagName("*");
+for(var i = -1, n = etcEle.length; n > ++i;){
+	var node = etcEle[i];
+	node.addEventListener('mouseover', function(e){
+		console.log( captureStr + " : ", this.tagName, " : ", "mouseover" );
+	}, capture);
+	node.addEventListener('mouseout', function(e){
+		console.log( captureStr + " : ", this.tagName, " : ", "mouseout" );
+	}, capture);
+}
+</script>
+<!-- ================================================== -->
+</body>
+</html>
+
+
+
+
+
+

@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>무제 문서</title>
+</head>
+<body>
+<script type="text/javascript">
+
+var Class = function( prop ){
+	var klass = function(){
+		this.init.apply(this, arguments);
+	}
+	klass.prototype.init = function(){};
+	
+	for( var name in prop ){
+		klass.prototype[name] = prop[name];
+	}
+	
+	return klass;
+};
+
+var Person = Class({
+	init : function( name ){
+		console.log( "init : ", name );		
+		this.test1();
+		this.test2();
+	}
+	
+	, test1 : function(){
+		console.log( "test1" );
+	}
+	
+	, test2 : function(){
+		console.log( "test2" );
+	}
+});
+
+var p = new Person( "jiman" );
+console.log( p );
+
+</script>
+</body>
+</html>

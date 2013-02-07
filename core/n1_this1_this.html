@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title> new document </title>
+</head>
+<body>
+<a href="" id="alink">alink</a>
+<script type="text/javascript">
+// 1. obj 안에서의 this
+// 메소드 레벨 안에서만 this는 해당 객체를 가르킴
+var obj = {
+	test1 : this, // window
+	test2 : function(){
+		return this; // this == obj
+	},
+	test3 : function(){
+		return function(){
+			return this; // this == ????? window
+		}
+	}
+}
+// alert( obj.test1 == window ); // true
+// alert( obj.test2() == obj ); // true
+// alert( obj.test3()() == window ); // true
+// alert( obj.test3().call(obj) == obj ); // true
+
+
+// 2. 함수안에서의 this
+// 함수안에서 this는 기본적으로 window, 하지만 new로 생성된 함수의 객체안에서
+// this는 해당 객체를 가르키게 된다.
+function test3(){
+	alert(window==this);
+}
+function test4(){
+	alert(window==this);
+	this.test = function(){
+		alert(' 실행 ');
+	}
+}
+// alert( window == this ); // true
+// test3(); // window == this
+// var tmp = new test4; // new(객체생성자) this -> tmp
+// tmp.test();
+
+
+// 3. 이벤트핸들러 안에서의 this
+var alink = document.getElementById("alink");
+	// console.log( alink ); / console.dir( alink );
+alink.onclick = function(){ // 객체
+	alert( this == alink ); // true
+	return false;
+}
+</script>
+</body>
+</html>

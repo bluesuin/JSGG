@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title> new document </title>
+</head>
+<body>
+<a href="" id="alink">alink</a>
+<script type="text/javascript">
+/* 클로저
+	1) 자바스크립트 함수안에 또다른 함수를 여러 수준 중첩할수 있다.
+	2) 함수는 자신의 매개변수와 지역변수를 읽고 쓸수 있다.
+	3) 바깥쪽 함수가 이미 반환된 상황에서 안쪽 함수가 나중에 호출 될지라도
+	앞의 규칙은 항상 작동한다.
+	ex) 이벤트처리기, setInterval/setTimeout
+*/
+var alink = document.getElementById("alink");
+alink.onclick = function(){
+	alert( this == alink ); // true
+	var scope = this; // scope
+	setTimeout(function(){
+		alert( scope == alink ); // true
+	}, 1000);
+	return false;
+}
+</script>
+</body>
+</html>

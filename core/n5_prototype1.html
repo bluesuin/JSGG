@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>무제 문서</title>
+</head>
+<body>
+<script type="text/javascript">
+function r(w,h){
+	this.width = w;
+	this.height = h;
+}
+console.dir( r );
+/*
+
+r(w, h)  함수에는(객체) 하나의 프로퍼티가 존재한다.
+	└ prototype
+		└ constructor (객체를 만든 함수를 반환하거나 설정을 하는 메소드이다.)
+
+*/
+
+var o = new r(15, 15);
+console.log( o.__proto__.hasOwnProperty("constructor") );
+console.log( o.__proto__.constructor === o.constructor );
+console.log( r.prototype.constructor === o.constructor );
+</script>
+</body>
+</html>
